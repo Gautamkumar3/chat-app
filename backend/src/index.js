@@ -3,6 +3,8 @@ const http = require("http")
 const cors = require("cors")
 const { Server } = require("socket.io");
 const chats = require("./data");
+const Connect = require("./config/db");
+const userRouter = require("./user/user.router")
 require('dotenv').config()
 const PORT = process.env.PORT
 
@@ -12,6 +14,7 @@ const io = new Server(server)
 
 app.use(cors())
 app.use(express.json())
+app.use("/user", userRouter)
 
 app.get("/", (req, res) => {
     res.send("Welcome")
@@ -36,7 +39,8 @@ io.on("connection", (socket) => {
 })
 
 
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
+    await Connect()
     console.log(`Server is running on port ${PORT}`)
 })
 

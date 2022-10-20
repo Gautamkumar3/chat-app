@@ -1,5 +1,7 @@
 import { Box, Container, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import React from 'react'
+import Login from '../component/Login'
+import Signup from '../component/Signup'
 
 const Home = () => {
     return (
@@ -9,21 +11,21 @@ const Home = () => {
                 <Heading fontWeight={"400"}>GK Chat</Heading>
             </Flex>
             <Box bg="white" w="100%" p={4} borderRadius="lg">
-            <Tabs variant='soft-rounded' colorScheme='green'>
-                <TabList>
-                    <Tab>Tab 1</Tab>
-                    <Tab>Tab 2</Tab>
-                </TabList>
-                <TabPanels>
-                    <TabPanel>
-                        <p>one!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>two!</p>
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>
-        </Box>
+                <Tabs variant='soft-rounded' colorScheme='green'>
+                    <TabList>
+                        <Tab w={"50%"} >Login</Tab>
+                        <Tab w={"50%"} >Sign Up</Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel>
+                            <Login />
+                        </TabPanel>
+                        <TabPanel>
+                            <Signup />
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+            </Box>
         </Container >
 
 

@@ -1,11 +1,10 @@
-
-
 body {
   margin: 0;
 }
 
-.App{
+.App {
   min-height: 100vh;
   display: flex;
- background-color:#CAF1DE;
+  background-color: #CAF1DE;
+  color: black;
 }

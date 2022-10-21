@@ -1,16 +1,57 @@
 import React, { useState } from 'react'
-import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const toast = useToast()
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
 
-    }
+        if (!email || !password) {
+            toast({
+                title: "Please Fill all the Feilds",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+
+            return;
+        }
+
+        try {
+            const { data } = await axios.post("http://localhost:8000/user/login", { email, password })
+            console.log(data);
+
+            toast({
+                title: "Login Successful",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            navigate("/chat")
+
+        } catch (error) {
+            toast({
+                title: "Error Occured!",
+                description: error.response.data.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
+
+        }
+    };
 
     return (
         <VStack spacing="10px">
@@ -44,7 +85,7 @@ const Login = () => {
                 width="100%"
                 style={{ marginTop: 15 }}
                 onClick={submitHandler}
-                isLoading={loading}
+
             >
                 Login
             </Button>

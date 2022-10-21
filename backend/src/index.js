@@ -5,6 +5,7 @@ const { Server } = require("socket.io");
 const chats = require("./data");
 const Connect = require("./config/db");
 const userRouter = require("./user/user.router")
+const chatRouter = require("./chat/Chat.router")
 require('dotenv').config()
 const PORT = process.env.PORT
 
@@ -15,20 +16,13 @@ const io = new Server(server)
 app.use(cors())
 app.use(express.json())
 app.use("/user", userRouter)
+app.use("/chat", chatRouter)
 
 app.get("/", (req, res) => {
     res.send("Welcome")
 })
 
-app.get("/chat", (req, res) => {
-    res.send(chats)
-})
 
-app.get("/chat/:id", (req, res) => {
-    const { id } = req.params
-    const singleChat = chats.find((el) => el._id === id);
-    res.send(singleChat)
-})
 
 io.on("connection", (socket) => {
     console.log("New Connection")

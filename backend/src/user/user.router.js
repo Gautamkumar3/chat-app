@@ -1,5 +1,6 @@
 const express = require("express");
 const generateToken = require("../config/token");
+const AuthMiddleware = require("../middleware/authMiddleware");
 const User = require("./user.schema");
 
 
@@ -36,6 +37,13 @@ app.post("/login", async (req, res) => {
     } catch (er) {
         return res.status(403).send(er.message)
     }
+})
+
+app.get("/", AuthMiddleware, async (req, res) => {
+    const keyword = req.query.search ? { $or: [{ name: { $regex: req.query.search, $options: "i" } }, { email: { $regex: req.query.search, $options: "i" } }] } : {}
+    console.log(keyword)
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } })
+    res.send(users)
 })
 
 

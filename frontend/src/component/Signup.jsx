@@ -19,7 +19,7 @@ const Signup = () => {
 
 
     const toast = useToast();
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const postDetails = (pic) => {
         console.log("yes")
@@ -74,7 +74,7 @@ const Signup = () => {
                 isClosable: true,
                 position: "top",
             });
-      
+
             return;
         }
         if (password !== confirmpassword) {
@@ -99,7 +99,7 @@ const Signup = () => {
                 isClosable: true,
                 position: "top",
             });
-            localStorage.setItem("userInfo", JSON.stringify(data));
+            localStorage.setItem("userInfo", JSON.stringify(data.data));
             // navigate("/chat")
         } catch (error) {
             toast({

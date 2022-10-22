@@ -45,7 +45,7 @@ app.post("/", AuthMiddleware, async (req, res) => {
 
 // ################## for get all chat related to particular user ###############
 
-app.get("/a", AuthMiddleware, async (req, res) => {
+app.get("/", AuthMiddleware, async (req, res) => {
     try {
         await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } }).populate("users", "-password").populate("groupAdmin", "-password").populate("latestMessage")
             .sort({ updatedAt: -1 })

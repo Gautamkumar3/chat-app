@@ -27,18 +27,19 @@ const Login = () => {
         }
 
         try {
-            const { data } = await axios.post("http://localhost:8000/user/login", { email, password })
-            console.log(data);
+            const res = await axios.post("http://localhost:8000/user/login", { email, password }).then((res) => {
+                console.log(res.data.data)
+                localStorage.setItem("userInfo", JSON.stringify(res.data.data));
+                toast({
+                    title: "Login Successful",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                });
+                navigate("/chat")
+            })
 
-            toast({
-                title: "Login Successful",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            });
-            localStorage.setItem("userInfo", JSON.stringify(data));
-            navigate("/chat")
 
         } catch (error) {
             toast({

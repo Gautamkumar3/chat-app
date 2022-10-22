@@ -5,6 +5,7 @@ import React, { useContext, useEffect } from 'react'
 import { getSender } from '../config/chatLogic'
 import { chatContext } from '../context/ChatContext'
 import ChatLoading from './ChatLoading'
+import GroupChatModal from './GroupChatModal'
 
 const MyChat = () => {
 
@@ -59,7 +60,7 @@ const MyChat = () => {
                         fontSize={{ base: "17px", md: "10px", lg: "17px" }}
                         rightIcon={<AddIcon />}
                     >
-                        New Group Chat
+                        <GroupChatModal />
                     </Button>
                 </Flex>
                 <Box
@@ -86,7 +87,7 @@ const MyChat = () => {
                                     key={chat._id}
                                 >
                                     <Text>
-                                        {!chat.isGroupChat
+                                        {!chat.isGroupchat
                                             ? getSender(user, chat.users)
                                             : chat.chatName}
                                     </Text>

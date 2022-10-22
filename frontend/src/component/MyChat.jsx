@@ -7,7 +7,7 @@ import { chatContext } from '../context/ChatContext'
 import ChatLoading from './ChatLoading'
 import GroupChatModal from './GroupChatModal'
 
-const MyChat = () => {
+const MyChat = ({refresh}) => {
 
     const { user, selectedChat, chats, setChats, setSelectedChat } = useContext(chatContext)
 
@@ -30,7 +30,7 @@ const MyChat = () => {
     }
     useEffect(() => {
         getChat()
-    }, [])
+    }, [refresh])
 
 
     return (
@@ -41,7 +41,7 @@ const MyChat = () => {
                 alignItems="center"
                 p={3}
                 bg="white"
-                w={{ base: "100%", md: "31%" }}
+                w={{ base: "100%" }}
                 borderRadius="lg"
                 borderWidth="1px"
             >
@@ -53,6 +53,7 @@ const MyChat = () => {
                     w="100%"
                     justifyContent="space-between"
                     alignItems="center"
+                    gap={20}
                 >
                     <Text>My Chats</Text>
                     <Button

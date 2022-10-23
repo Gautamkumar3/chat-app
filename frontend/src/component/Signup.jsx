@@ -22,8 +22,6 @@ const Signup = () => {
     const navigate = useNavigate()
 
     const postDetails = (pic) => {
-        console.log("yes")
-        console.log(pic)
         if (pic === undefined) {
             toast({
                 title: 'Please seclect an Image!',

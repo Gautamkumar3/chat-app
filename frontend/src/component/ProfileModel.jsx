@@ -14,18 +14,18 @@ import {
     Center,
 } from '@chakra-ui/react'
 
-const ProfileModel = ({ user, email, pic }) => {
+const ProfileModel = ({ user, email, pic,title="My Profile" }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <>
-            <Text onClick={onOpen}>My Profile</Text>
+            <Text onClick={onOpen}>{title}</Text>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>{user}</ModalHeader>
+                    <ModalHeader fontSize="30px" textAlign="center">{user}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <Center>
